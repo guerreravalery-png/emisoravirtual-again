@@ -2,51 +2,38 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import logo from "./assets/logo.jpeg"; 
-import banner from "./assets/banner.jpeg";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-// Canciones sugeridas por género
+// Canciones sugeridas por género con rutas limpias y sin espacios
 const CANCIONES_POR_GENERO = {
   pop: [
-    "Levitating - Dua Lipa",
-    "As It Was - Harry Styles",
-    "Blinding Lights - The Weeknd",
+    { titulo: "Levitating - Dua Lipa", audioUrl: "/audio/DuaLipa-Levitating.mp3" },
+    { titulo: "As It Was - Harry Styles", audioUrl: "/audio/HarryStyles-AsItWas.mp3" },
   ],
   rock: [
-    "Bohemian Rhapsody - Queen",
-    "Smells Like Teen Spirit - Nirvana",
-    "Otherside - Red Hot Chili Peppers",
+    { titulo: "Bohemian Rhapsody - Queen", audioUrl: "/audio/Queen-Bohemian.mp3" },
+    { titulo: "Smells Like Teen Spirit - Nirvana", audioUrl: "/audio/Nirvana-Smells.mp3" },
   ],
   reggaeton: [
-    "Gasolina - Daddy Yankee",
-    "Danza Kuduro - Don Omar",
-    "La Botella - J Balvin",
+    { titulo: "Danza Kuduro - Don Omar", audioUrl: "/audio/DonOmarDanza.mp3" },
+    { titulo: "Morado - J Balvin", audioUrl: "/audio/JBalvinMorado.mp3" },
   ],
   vallenato: [
-    "La Gota Fría - Carlos Vives",
-    "Volví a Nacer - Carlos Vives",
-    "La Creciente - Los Diablitos",
+    { titulo: "Volví a Nacer - Carlos Vives", audioUrl: "/audio/CarlosVives.mp3" },
+    { titulo: "La Creciente - Los Diablitos", audioUrl: "/audio/LaCreciente.mp3" },
   ],
   salsa: [
-    "Vivir Mi Vida - Marc Anthony",
-    "Pedro Navaja - Rubén Blades",
-    "La Rebelión - Joe Arroyo",
+    { titulo: "Vivir Mi Vida - Marc Anthony", audioUrl: "/audio/MarcAnthony.mp3" },
+    { titulo: "La Rebelión - Joe Arroyo", audioUrl: "/audio/JoeArroyoLaRebelion.mp3" },
   ],
   electronica: [
-    "Titanium - David Guetta ft. Sia",
-    "Wake Me Up - Avicii",
-    "Strobe - Deadmau5",
+    { titulo: "Titanium - David Guetta ft. Sia", audioUrl: "/audio/DavidGuettaSia-Titanium.mp3" },
+    { titulo: "Wake Me Up - Avicii", audioUrl: "/audio/Avicii.mp3" },
   ],
   clasica: [
-    "Sinfonía No. 5 - Beethoven",
-    "Las Cuatro Estaciones - Vivaldi",
-    "Claro de Luna - Debussy",
-  ],
-  jazz: [
-    "Take Five - Dave Brubeck",
-    "So What - Miles Davis",
-    "Feeling Good - Nina Simone",
+    { titulo: "Sinfonía No. 5 - Beethoven", audioUrl: "/audio/sinfonia.mp3" },
+    { titulo: "Las Cuatro Estaciones - Vivaldi", audioUrl: "/audio/Vivaldi.mp3" },
   ],
 };
 
@@ -63,6 +50,9 @@ function App() {
 
   // Estado para el desplegable de géneros musicales
   const [generoSeleccionado, setGeneroSeleccionado] = useState("pop");
+
+  // Variable que filtra dinámicamente las canciones según el select
+  const cancionesActuales = CANCIONES_POR_GENERO[generoSeleccionado] || [];
 
   // 🔹 Cargar avisos y comentarios al iniciar sesión
   useEffect(() => {
@@ -153,7 +143,6 @@ function App() {
 
       <main className="content">
         <section className="hero">
-        
           <h1>Bienvenidos a la Emisora Escolar</h1>
           <p>Sintoniza la mejor programación creada por y para los estudiantes.</p>
         </section>
@@ -180,7 +169,7 @@ function App() {
           </div>
         </section>
 
-        {/* Canciones por género */}
+        {/* Canciones por género con reproductor */}
         <section id="canciones" className="canciones-section">
           <h2>🎵 Canciones</h2>
           <label htmlFor="genero-select">Elige un género:</label>
@@ -188,7 +177,10 @@ function App() {
             id="genero-select"
             className="genero-select"
             value={generoSeleccionado}
-            onChange={(e) => setGeneroSeleccionado(e.target.value)}
+            onChange={(e) => {
+              console.id = e.target.value; // Forzar lectura limpia
+              setGeneroSeleccionado(e.target.value);
+            }}
           >
             <option value="pop">Pop</option>
             <option value="rock">Rock</option>
@@ -197,13 +189,19 @@ function App() {
             <option value="salsa">Salsa</option>
             <option value="electronica">Electrónica</option>
             <option value="clasica">Clásica</option>
-            <option value="jazz">Jazz</option>
           </select>
-          <ul className="canciones-lista">
-            {CANCIONES_POR_GENERO[generoSeleccionado].map((cancion) => (
-              <li key={cancion}>{cancion}</li>
+          
+          <div className="canciones-lista">
+            {CANCIONES_POR_GENERO[generoSeleccionado] && CANCIONES_POR_GENERO[generoSeleccionado].map((item, index) => (
+              <div key={`${generoSeleccionado}-${index}`} className="cancion-card" style={{ marginBottom: "20px", padding: "15px", background: "#f9f9f9", borderRadius: "8px" }}>
+                <p style={{ fontWeight: "bold", marginBottom: "8px" }}>{item.titulo}</p>
+                <audio controls style={{ width: "100%" }}>
+                  <source src={item.audioUrl} type="audio/mpeg" />
+                  Tu navegador no soporta el elemento de audio.
+                </audio>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
         {/* Opiniones / Caja de comentarios */}
@@ -224,7 +222,6 @@ function App() {
                   <option value="salsa">Salsa</option>
                   <option value="electronica">Electrónica</option>
                   <option value="clasica">Clásica</option>
-                  <option value="jazz">Jazz</option>
                 </select>
               </div>
               <textarea placeholder="Escribe tu opinión o sugerencia musical" value={opinion.comentario} onChange={(e) => setOpinion({ ...opinion, comentario: e.target.value })} required />
@@ -253,7 +250,7 @@ function App() {
 
         {/* Emisoras Mundiales */}
         <section id="emisoras" className="emisoras-section">
-          <h2> Emisoras Mundiales Gratis 📻</h2>
+          <h2>🌍 Emisoras Mundiales Gratis 📻</h2>
           <ul className="emisoras-lista">
             <li><a href="https://somafm.com/player/#/now-playing/groovesalad" target="_blank" rel="noopener noreferrer">SomaFM - Groove Salad (Ambient/Chillout)</a></li>
             <li><a href="https://www.wqxr.org/" target="_blank" rel="noopener noreferrer">WQXR - Clásica de Nueva York</a></li>
@@ -273,4 +270,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
