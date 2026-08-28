@@ -1,0 +1,465 @@
+/* ===== Estructura general ===== */
+body { 
+  margin: 0; 
+  font-family: 'Garomond', serif; 
+  background: linear-gradient(180deg, #7db2b9 0%, #f2f8f5 45%, #9ae7da 100%)
+}
+
+.container { 
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh; 
+}
+
+/* ===== Login Profesional con Degradado ===== */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #5bbfdd, #3e6364);
+}
+
+.login-box {
+  background: white;
+  padding: 70px; 
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 320px; 
+}
+
+.login-logo {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.login-box input {
+  display: block;
+  width: 100%;
+  margin: 15px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #2c7186; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+.login-box button:hover {
+  background-color: #62e9d2; 
+  transform: scale(1.02);    
+}
+
+/* Animación */
+.animate-fade {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== Header y Banner ===== */
+.header-emisora { 
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  position: relative; 
+  width: 100%; 
+  text-align: center; 
+  margin-bottom: 60px; 
+  background: #2c7186;
+  color: white;
+  padding-bottom: 10px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.banner-img { 
+  width: 100%; 
+  height: auto; 
+  max-height: 200px; 
+  object-fit: contain; 
+  background-color: #2c7186; 
+}
+
+.logo-overlay { 
+  position: absolute; 
+  bottom: -50px; 
+  left: 50px; 
+}
+
+.logo-img { 
+  width: 120px; 
+  height: 120px; 
+  border-radius: 50%; 
+  border: 4px solid white; 
+  background: white; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+}
+
+/* ===== Botón de Logout ===== */
+.logout-btn {
+  background-color: rgba(14, 152, 177, 0.2); 
+  color: white;
+  border: 1px solid white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.9s;
+}
+
+.logout-btn:hover {
+  background-color: rgba(89, 228, 193, 0.6); 
+}
+
+/* ===== Navbar ===== */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 15px 0 0 0;
+}
+
+.navbar li {
+  margin: 0 15px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Contenido principal ===== */
+.content { 
+  padding: 20px; 
+  text-align: center; 
+}
+
+.hero h1, .hero h2 { 
+  color: #004d40; 
+  margin-top: 20px; 
+}
+
+/* ===== Avisos ===== */
+.avisos-section { 
+  margin-top: 30px; 
+  padding: 20px; 
+}
+
+.avisos-lista { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 20px; 
+}
+
+.aviso-card { 
+  background: white; 
+  padding: 20px; 
+  border-radius: 10px; 
+  border-left: 5px solid #2c7186;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  width: 300px; 
+  text-align: left; 
+  position: relative;
+}
+
+.aviso-card h3 {
+  margin: 0 0 10px 0;
+  color: #2c7186;
+}
+
+/* Formulario de Avisos */
+.form-avisos {
+  margin: 20px auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-avisos input,
+.form-avisos textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Garomond', serif;
+}
+
+.form-avisos textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-avisos button {
+  background-color: #2c7186;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+.form-avisos button:hover {
+  background-color: #62e9d2;
+  transform: scale(1.02);
+}
+
+/* ===== Radios ===== */
+.radio-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.radio-section select {
+  padding: 10px;
+  width: 60%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* ===== Emisoras Mundiales ===== */
+.emisoras-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.emisoras-lista {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.emisoras-lista li {
+  margin: 10px 0;
+}
+
+.emisoras-lista a {
+  color: #395b66;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.emisoras-lista a:hover {
+  text-decoration: blink;
+  color: #3e645e;
+}
+
+
+/* ===== Canciones ===== */
+.canciones-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.genero-select {
+  margin: 10px auto 20px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  display: block;
+}
+
+.canciones-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: left;
+}
+
+.canciones-lista li {
+  background: #f4f4f4;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 6px 0;
+}
+
+/* ===== Caja de comentarios ===== */
+.opiniones-section {
+  padding: 20px;
+}
+
+.opiniones-card {
+  background: linear-gradient(180deg, #eef6f7 0%, #ffffff 100%);
+  border: 1px solid #dbe7e9;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 6px 18px rgba(44, 113, 134, 0.08);
+}
+
+.opiniones-card h2 {
+  margin-top: 0;
+  color: #1c4f5e;
+}
+
+.form-opinion {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-opinion-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-opinion-row input {
+  flex: 2;
+}
+
+.form-opinion-row select {
+  flex: 1;
+}
+
+.form-opinion input,
+.form-opinion select,
+.form-opinion textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Garomond', serif;
+  font-size: 1rem;
+  background: white;
+}
+
+.form-opinion textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-opinion button {
+  background-color: #2c7186;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+.form-opinion button:hover {
+  background-color: #62e9d2;
+  transform: scale(1.02);
+}
+
+.comentarios-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  text-align: left;
+}
+
+.comentarios-vacio {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #777;
+}
+
+.comentario-card {
+  background: white;
+  border: 1px solid #e0e6e7;
+  border-top: 3px solid #2c7186;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comentario-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+.comentario-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.comentario-avatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #2c7186;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.comentario-header strong {
+  display: block;
+  color: #1c4f5e;
+}
+
+.comentario-genero {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #2c7186;
+  background: #e1f0f3;
+  border-radius: 20px;
+  padding: 2px 10px;
+  text-transform: capitalize;
+  margin-top: 2px;
+}
+
+.comentario-card p {
+  margin: 0;
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .form-opinion-row {
+    flex-direction: column;
+  }
+}
+
+/* ===== Footer ===== */
+.footer { 
+  margin-top: auto; 
+  padding: 20px; 
+  background: #333; 
+  color: white; 
+  text-align: center; 
+}
