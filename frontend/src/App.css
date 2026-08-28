@@ -272,39 +272,56 @@ body {
 }
 
 .emisoras-lista a:hover {
-  text-decoration: blink;
+  text-decoration: underline;
   color: #3e645e;
 }
 
 
-/* ===== Canciones ===== */
+/* ===== Canciones (Actualizado para reproductores) ===== */
 .canciones-section {
   text-align: center;
   padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .genero-select {
-  margin: 10px auto 20px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  margin: 10px auto 25px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #2c7186;
   font-size: 1rem;
   display: block;
+  background: white;
+  cursor: pointer;
 }
 
 .canciones-lista {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cancion-card {
+  background: white;
+  border: 1px solid #dbe7e9;
+  border-left: 4px solid #2c7186;
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
   text-align: left;
 }
 
-.canciones-lista li {
-  background: #f4f4f4;
-  border-radius: 6px;
-  padding: 10px 14px;
-  margin: 6px 0;
+.cancion-card p {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  color: #1c4f5e;
+  font-size: 1.05rem;
+}
+
+.cancion-card audio {
+  width: 100%;
+  outline: none;
 }
 
 /* ===== Caja de comentarios ===== */
