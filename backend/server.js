@@ -4,6 +4,7 @@ const express = require("express");
 const mysql = require("mysql2/promise");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -61,6 +62,17 @@ app.post("/avisos", async (req, res) => {
     res.status(500).json({ message: "Error al crear el aviso" });
   }
 });
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder (adjust 'frontend/dist' if using Vite, or 'frontend/build' if using CRA)
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+  });
+}
+
 
 // --- Login ---
 
