@@ -1,0 +1,10 @@
+{
+  "name": "mern-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "install-deps": "npm install --prefix backend && npm install --prefix frontend",
+    "build-frontend": "npm run build --prefix frontend",
+    "railway-build": "npm run install-deps && npm run build-frontend",
+    "start": "node backend/server.js"
+  }
+}
