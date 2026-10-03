@@ -62,7 +62,7 @@ app.post("/avisos", async (req, res) => {
 });
 
 // Serve static assets if in production
-if (process.env.NODE_ENV !=== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 } else {
   // Set static folder (adjust 'frontend/dist' if using Vite, or 'frontend/build' if using CRA)
