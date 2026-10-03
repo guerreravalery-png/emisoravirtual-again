@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const express = require("express");
 const mysql = require("mysql2/promise");
 const cors = require("cors");
@@ -64,7 +62,9 @@ app.post("/avisos", async (req, res) => {
 });
 
 // Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !=== 'production') {
+  require('dotenv').config();
+} else {
   // Set static folder (adjust 'frontend/dist' if using Vite, or 'frontend/build' if using CRA)
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
