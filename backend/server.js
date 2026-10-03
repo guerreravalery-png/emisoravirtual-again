@@ -68,7 +68,7 @@ if (process.env.NODE_ENV !== 'production') {
   // Set static folder (adjust 'frontend/dist' if using Vite, or 'frontend/build' if using CRA)
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-  app.get('*', (req, res) => {
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
   });
 }
