@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 import logo from "./assets/logo.jpeg"; 
 
-const API_URL = process.env.REACT_APP_API_URL || "http://0.0.0.0:3001";
+const API_URL = process.env.REACT_APP_API_URL || "https://emisoravirtual-again-production-a424.up.railway.app/";
 
 // Canciones sugeridas por género con rutas limpias y sin espacios
 const CANCIONES_POR_GENERO = {
