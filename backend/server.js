@@ -35,6 +35,57 @@ const pool = mysql.createPool({
   }
 })();
 
+// --- Registro de usuario ---
+
+app.post("/signUp", async (req, res) => {
+  const { usuario, password } = req.body;   // datos del usuario
+
+  //Verificamos los datos obligatorios del usuario    
+  if(!usuario && !password){
+    return res.status(400).json({ loggedIn: false, message: "Nombre de usuario y password son obligatorios" });
+  }         
+  try {    
+    // encriptamos password
+    const hashPassword = await bcrypt.hash(password, 10);
+  //guardamos datos del usuario en la BD
+    const [userData] = await pool.query(
+      "INSERT INTO usuarios (usuario, password) VALUES (?, ?)",
+      [usuario, hashPassword]
+    );
+
+    if (userData.length !== 0) {
+      res.status(201).json({ loggedIn: true, id: userData.insertId, usuario, message: "Bienvenido" });
+    }
+  } catch (err) {
+    res.status(500).json({ loggedIn: false, message: "Error del servidor" });
+  }
+});
+
+// --- Login ---
+
+app.post("/login", async (req, res) => {
+  const { usuario, password } = req.body;
+  if (!usuario || !password) {
+    return res.status(400).json({ loggedIn: false, message: "Usuario y contraseña son obligatorios" });
+  }
+  try {
+    const [rows] = await pool.query(
+      "SELECT * FROM usuarios WHERE usuario = ?",
+      [usuario]
+    );
+    if (rows.length === 0) {
+      return res.status(401).json({ loggedIn: false, message: "Usuario o contraseña incorrectos" });
+    }
+    const coincide = await bcrypt.compare(password, rows[0].password);
+    if (!coincide) {
+      return res.status(401).json({ loggedIn: false, message: "Usuario o contraseña incorrectos" });
+    }
+    res.json({ loggedIn: true, message: "Bienvenido" });
+  } catch (err) {
+    res.status(500).json({ loggedIn: false, message: "Error del servidor" });
+  }
+});
+
 // --- Avisos ---
 
 app.get("/avisos", async (req, res) => {
@@ -61,30 +112,6 @@ app.post("/avisos", async (req, res) => {
     res.status(201).json({ id: result.insertId, titulo, descripcion, tipo: tipo || "aviso" });
   } catch (err) {
     res.status(500).json({ message: "Error al crear el aviso" });
-  }
-});
-// --- Login ---
-
-app.post("/login", async (req, res) => {
-  const { usuario, password } = req.body;
-  if (!usuario || !password) {
-    return res.status(400).json({ loggedIn: false, message: "Usuario y contraseña son obligatorios" });
-  }
-  try {
-    const [rows] = await pool.query(
-      "SELECT * FROM usuarios WHERE usuario = ?",
-      [usuario]
-    );
-    if (rows.length === 0) {
-      return res.status(401).json({ loggedIn: false, message: "Usuario o contraseña incorrectos" });
-    }
-    const coincide = await bcrypt.compare(password, rows[0].password);
-    if (!coincide) {
-      return res.status(401).json({ loggedIn: false, message: "Usuario o contraseña incorrectos" });
-    }
-    res.json({ loggedIn: true, message: "Bienvenido" });
-  } catch (err) {
-    res.status(500).json({ loggedIn: false, message: "Error del servidor" });
   }
 });
 
