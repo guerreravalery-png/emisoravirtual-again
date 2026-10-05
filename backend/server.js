@@ -63,21 +63,6 @@ app.post("/avisos", async (req, res) => {
     res.status(500).json({ message: "Error al crear el aviso" });
   }
 });
-
-// Serve static assets if in production
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-} else {
-  // Set static folder (adjust 'frontend/dist' if using Vite, or 'frontend/build' if using CRA)
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-  app.get(/.*/, (req, res) => {
-     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-    //res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
-  });
-}
-
-
 // --- Login ---
 
 app.post("/login", async (req, res) => {
@@ -134,6 +119,19 @@ app.post("/opiniones", async (req, res) => {
     res.status(500).json({ message: "Error al enviar la opinión" });
   }
 });
+
+// Serve static assets if in production
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+} else {
+  // Set static folder (adjust 'frontend/dist' if using Vite, or 'frontend/build' if using CRA)
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  app.get(/.*/, (req, res) => {
+     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+    //res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+  });
+}
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor backend corriendo en el puerto ${PORT}`);
