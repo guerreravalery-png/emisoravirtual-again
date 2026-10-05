@@ -12,7 +12,7 @@ const CANCIONES_POR_GENERO = {
     { titulo: "As It Was - Harry Styles", audioUrl: "/audio/HarryStyles-AsItWas.mp3" },
   ],
   rock: [
-    { titulo: "Bohemian Rhapsody - Queen", audioUrl: "/audio/Queen-Bohemian.mp3" },
+    { titulo: "Bohemian Rhapsody - Queen", audioUrl: "/audio/Queen-Bohemiam.mp3" },
     { titulo: "Smells Like Teen Spirit - Nirvana", audioUrl: "/audio/Nirvana-Smells.mp3" },
   ],
   reggaeton: [
@@ -54,19 +54,22 @@ function App() {
   // Variable que filtra dinámicamente las canciones según el select
   const cancionesActuales = CANCIONES_POR_GENERO[generoSeleccionado] || [];
 
-  // 🔹 Cargar avisos y comentarios al iniciar sesión
-  useEffect(() => {
-    if (isLoggedIn) {
-      axios.get(`${API_URL}/avisos`)
-        .then(res => setAvisos(res.data))
-        .catch(err => console.error("Error al obtener avisos:", err));
+  // Registro de usuarios
+  const handleSignUp = () => {
+    axios.post(`${API_URL}/signUp`, { usuario, password })
+      .then(res => {
+        if (res.data.loggedIn) {
+          setIsLoggedIn(true);
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch(err => {
+        console.error("Error en login:", err);
+        alert(err.response?.data?.message || "Usuario o contraseña incorrectos");
+      });
+  };
 
-      axios.get(`${API_URL}/opiniones`)
-        .then(res => setComentarios(res.data))
-        .catch(err => console.error("Error al obtener comentarios:", err));
-    }
-  }, [isLoggedIn]);
-console.log(comentarios);
   // 🔹 Login
   const handleLogin = () => {
     axios.post(`${API_URL}/login`, { usuario, password })
@@ -82,6 +85,19 @@ console.log(comentarios);
         alert(err.response?.data?.message || "Usuario o contraseña incorrectos");
       });
   };
+
+   // 🔹 Cargar avisos y comentarios al iniciar sesión
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios.get(`${API_URL}/avisos`)
+        .then(res => setAvisos(res.data))
+        .catch(err => console.error("Error al obtener avisos:", err));
+
+      axios.get(`${API_URL}/opiniones`)
+        .then(res => setComentarios(res.data))
+        .catch(err => console.error("Error al obtener comentarios:", err));
+    }
+  }, [isLoggedIn]);
 
   // 🔹 Agregar aviso
   const handleAgregarAviso = (e) => {
@@ -115,7 +131,10 @@ console.log(comentarios);
           <h2>Iniciar sesión</h2>
           <input type="text" placeholder="Usuario" onChange={(e) => setUsuario(e.target.value)} />
           <input type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} />
+          <h5>Si tienes una cuenta de usuario, dar click en Ingresar</h5>
           <button onClick={handleLogin}>Ingresar</button>
+          <h5>Si estas creando una cuenta de usuario, dar click en Registrarse</h5>
+          <button onClick={handleSignUp}>Registrarse</button>
         </div>
       </div>
     );
