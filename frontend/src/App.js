@@ -211,7 +211,7 @@ function App() {
           </select>
           
           <div className="canciones-lista">
-            {CANCIONES_POR_GENERO[generoSeleccionado] && CANCIONES_POR_GENERO[generoSeleccionado].map((item, index) => (
+            {cancionesActuales.map((item, index) => (
               <div key={`${generoSeleccionado}-${index}`} className="cancion-card" style={{ marginBottom: "20px", padding: "15px", background: "#f9f9f9", borderRadius: "8px" }}>
                 <p style={{ fontWeight: "bold", marginBottom: "8px" }}>{item.titulo}</p>
                 <audio controls style={{ width: "100%" }}>
