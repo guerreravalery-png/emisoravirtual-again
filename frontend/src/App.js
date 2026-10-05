@@ -66,7 +66,7 @@ function App() {
         .catch(err => console.error("Error al obtener comentarios:", err));
     }
   }, [isLoggedIn]);
-
+console.log(comentarios);
   // 🔹 Login
   const handleLogin = () => {
     axios.post(`${API_URL}/login`, { usuario, password })
